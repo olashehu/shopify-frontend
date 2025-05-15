@@ -17,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunitoSans.className} antialiased`}>
-        <Header />
-        {children}
-        <Footer />
+        <div className="max-w-7xl mx-auto">
+          <Header />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

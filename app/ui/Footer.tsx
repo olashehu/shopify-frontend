@@ -27,7 +27,7 @@ export default function Footer() {
       </div>
 
       {/* Footer Links Section */}
-      <div className="px-6 md:px-20 py-12 grid grid-cols-2 md:grid-cols-6 gap-8 text-sm">
+      <div className="py-12 px-4 md:px-8 lg:px-20 grid grid-cols-2 md:grid-cols-6 gap-8 text-sm">
         {/* Brand */}
         <div className="col-span-2 md:col-span-1">
           <h3 className="text-xl font-bold mb-4">SHOP.CO</h3>

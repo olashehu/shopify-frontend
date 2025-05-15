@@ -1,13 +1,13 @@
 import React from "react";
 import HeroSection from "@/app/ui/home/HeroSection";
-import ProductOverview from "@/app/ui/home/ProductPreview";
+import ProductsOverview from "@/app/ui/home/ProductsPreview";
 
 const LandingPage = () => {
   return (
-    <div className="">
+    <>
       <HeroSection />
-      <ProductOverview />
-    </div>
+      <ProductsOverview />
+    </>
   );
 };
 

@@ -6,8 +6,8 @@ import i from "@/public/images/hero-image.svg";
 
 const HeroSection = () => {
   return (
-    <section className="min-h-[calc(100vh-60px)] bg-[#f2f0f1] px-4 py-10 md:px-12 lg:px-20 flex items-center">
-      <div className="mx-auto flex flex-col-reverse md:flex-row items-center gap-10 max-w-7xl w-full">
+    <section className="min-h-[calc(100vh-60px)] bg-[#f2f0f1] px-4 py-10 md:px-8 lg:px-20 flex items-center">
+      <div className="flex flex-col-reverse md:flex-row items-center justify-between">
         {/* Text Content */}
         <div className="w-full md:w-2/5 flex flex-col gap-6 text-center md:text-left">
           <h1
@@ -31,7 +31,7 @@ const HeroSection = () => {
         </div>
 
         {/* Image */}
-        <div className="w-full md:w-3/5 max-w-xl lg:max-w-2xl">
+        <div className="md:w-3/5 max-w-xl lg:max-w-2xl">
           <AspectRatio ratio={16 / 9}>
             <Image
               src={i}
