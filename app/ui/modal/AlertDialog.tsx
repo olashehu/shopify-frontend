@@ -1,9 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import {
   AlertDialog,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogHeader,
@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { ProductsTypes } from "@/app/lib/constant";
 import CancelIcon from "@/app/icons/CancelIcon";
 import ProductSkeleton from "../skeleton/ProductSkeleton";
+import { useCart } from "@/app/context/cartContext";
 
 interface Dialog {
   openDialog: boolean;
@@ -28,6 +29,9 @@ interface Dialog {
 }
 
 const AlertDialogModal = ({ openDialog, onOpenChange, product }: Dialog) => {
+  const [count, setCount] = useState(1);
+  const { addToCart } = useCart();
+
   if (!product) {
     return (
       <AlertDialog open={openDialog} onOpenChange={onOpenChange}>
@@ -37,19 +41,25 @@ const AlertDialogModal = ({ openDialog, onOpenChange, product }: Dialog) => {
       </AlertDialog>
     );
   }
+
   const { images, name, price, description } = product;
 
   return (
     <AlertDialog open={openDialog} onOpenChange={onOpenChange}>
       <AlertDialogContent className="w-full md:max-w-[900px] p-2 pb-4 md:py-10 overflow-y-scroll">
-        <AlertDialogCancel
+        <Button
           asChild
           className="border-none outline-none absolute right-0 cursor-pointer"
+          variant={"ghost"}
+          onClick={() => {
+            onOpenChange(false);
+            setCount(1);
+          }}
         >
           <span>
             <CancelIcon />
           </span>
-        </AlertDialogCancel>
+        </Button>
         <div className="md:flex gap-4">
           <AlertDialogDescription className="mt-8 flex gap-2">
             <div className="flex flex-col gap-4 aspect-square w-[80px]">
@@ -114,17 +124,33 @@ const AlertDialogModal = ({ openDialog, onOpenChange, product }: Dialog) => {
             <p className="font-medium text-lg">{price}</p>
             <p>{description}</p>
             <div className="flex items-center justify-center">
-              <Button variant={"outline"} className="cursor-pointer">
+              <Button
+                variant={"outline"}
+                className="cursor-pointer"
+                onClick={() => setCount(count - 1)}
+                disabled={count == 1}
+              >
                 -
               </Button>
               <div className="w-[40px] h-[36px] flex items-center justify-center bg-accent">
-                0
+                {count}
               </div>
-              <Button variant={"outline"} className="cursor-pointer">
+              <Button
+                variant={"outline"}
+                className="cursor-pointer"
+                onClick={() => setCount(count + 1)}
+              >
                 +
               </Button>
             </div>
-            <Button className="w-full max-w-[120px] mx-auto uppercase">
+            <Button
+              className="w-full max-w-[120px] mx-auto uppercase"
+              onClick={() => {
+                addToCart(product, count);
+                onOpenChange(false); // optionally close modal
+                setCount(1); // reset quantity
+              }}
+            >
               add to cart
             </Button>
           </AlertDialogDescription>

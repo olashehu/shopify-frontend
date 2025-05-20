@@ -10,6 +10,13 @@ export interface ProductsTypes {
   createdAt?: string;
 }
 
+export interface Pagination {
+  total: number;
+  page: number;
+  totalPages: number;
+  limit: number;
+}
+
 export const baseURL = "https://shopify-commerce-api.onrender.com";
 // export const frontendURL = "https://shopify-frontend-lnyt.onrender.com";
 export const LIMIT = 10;

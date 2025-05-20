@@ -16,7 +16,7 @@ const HeroSection = () => {
             Find products that match your taste
           </h1>
           <p className="text-gray-700 text-base sm:text-lg">
-            Browse through our diverse range of meticulously crafted garments,
+            Browse through our diverse range of meticulously crafted products,
             designed to bring out your individuality and cater to your sense of
             style.
           </p>

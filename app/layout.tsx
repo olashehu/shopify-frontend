@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
+import { CartProvider } from "./context/cartContext";
 import { nunitoSans } from "@/app/ui/fonts";
 import "./globals.css";
 
@@ -17,11 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunitoSans.className} antialiased`}>
-        <div className="max-w-7xl mx-auto">
-          <Header />
-          {children}
-          <Footer />
-        </div>
+        <CartProvider>
+          <div className="max-w-7xl mx-auto">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+        </CartProvider>
       </body>
     </html>
   );

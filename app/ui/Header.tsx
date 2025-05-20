@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,6 +8,7 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
+import { useCart } from "@/app/context/cartContext";
 // import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import HamburgerIcon from "../icons/HamburgerIcon";
@@ -15,6 +17,7 @@ import ShoppingCartIcon from "../icons/ShoppingCartIcon";
 import ShopifyIcon from "../icons/ShopifyIcon";
 
 const Header = () => {
+  const { cartCount } = useCart();
   return (
     <nav className="flex items-center justify-between px-4 md:px-8 lg:px-20 py-3 shadow-md sticky top-0 z-50 bg-white">
       {/* Logo */}
@@ -39,8 +42,11 @@ const Header = () => {
         <div className="flex items-center gap-3">{"Olashehu"}</div>
         <Button variant="ghost" className="p-2 relative">
           <ShoppingCartIcon />
-          <span className="absolute bottom-6 w-5 h-5 rounded-full bg-gray-600 text-white flex items-center justify-center">
-            1
+          {/* <span className="absolute bottom-6 w-5 h-5 rounded-full bg-gray-600 text-white flex items-center justify-center">
+            {cartCount}
+          </span> */}
+          <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">
+            {cartCount}
           </span>
         </Button>
         <Sheet>
