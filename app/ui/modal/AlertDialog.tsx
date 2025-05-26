@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   AlertDialog,
@@ -28,9 +28,20 @@ interface Dialog {
   product: ProductsTypes | null;
 }
 
-const AlertDialogModal = ({ openDialog, onOpenChange, product }: Dialog) => {
-  const [count, setCount] = useState(1);
-  const { addToCart } = useCart();
+const AlertDialogModal = ({ openDialog, onOpenChange, product,}: Dialog) => {
+    const { addToCart, cartItems } = useCart();
+  const [count, setCount] = useState(() =>
+    cartItems.find((item) => item.id === product?.id)?.quantity ?? 1
+  );
+
+  useEffect(() => {
+    if (product) {
+      const quantity =
+        cartItems.find((item) => item.id === product.id)?.quantity ?? 1;
+      setCount(quantity);
+    }
+  }, [product?.id, cartItems]);
+
 
   if (!product) {
     return (
@@ -44,6 +55,7 @@ const AlertDialogModal = ({ openDialog, onOpenChange, product }: Dialog) => {
 
   const { images, name, price, description } = product;
 
+
   return (
     <AlertDialog open={openDialog} onOpenChange={onOpenChange}>
       <AlertDialogContent className="w-full md:max-w-[900px] p-2 pb-4 md:py-10 overflow-y-scroll">
@@ -53,7 +65,6 @@ const AlertDialogModal = ({ openDialog, onOpenChange, product }: Dialog) => {
           variant={"ghost"}
           onClick={() => {
             onOpenChange(false);
-            setCount(1);
           }}
         >
           <span>
@@ -63,15 +74,7 @@ const AlertDialogModal = ({ openDialog, onOpenChange, product }: Dialog) => {
         <div className="md:flex gap-4">
           <AlertDialogDescription className="mt-8 flex gap-2">
             <div className="flex flex-col gap-4 aspect-square w-[80px]">
-              {images.length == 1 ? (
-                <Image
-                  src={images[0]}
-                  alt={name}
-                  width={40}
-                  height={40}
-                  className="w-full h-full object-cover bg-gray-100 rounded-md"
-                />
-              ) : (
+              {images.length > 1 && (
                 images.map((img) => (
                   <Image
                     priority
@@ -147,8 +150,7 @@ const AlertDialogModal = ({ openDialog, onOpenChange, product }: Dialog) => {
               className="w-full max-w-[120px] mx-auto uppercase"
               onClick={() => {
                 addToCart(product, count);
-                onOpenChange(false); // optionally close modal
-                setCount(1); // reset quantity
+                onOpenChange(false);
               }}
             >
               add to cart

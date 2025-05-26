@@ -1,12 +1,13 @@
 "use client";
+
 import React, { useState, useEffect, useTransition } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useDebouncedCallback } from "use-debounce";
-import { ProductsTypes, Pagination } from "@/app/lib/constant";
+import { ProductsTypes, Pagination, baseURL, LIMIT } from "@/app/lib/constant";
 import AlertDialogModal from "../modal/AlertDialog";
-import { baseURL, LIMIT } from "@/app/lib/constant";
+import { formatCurrency } from "@/app/lib/utils";
 
 export default function ProductsOverview() {
   const [products, setProducts] = useState<ProductsTypes[]>([]);
@@ -45,7 +46,7 @@ export default function ProductsOverview() {
     fetchProducts(category, page);
   }, [category, page]);
 
-  console.log(pagination, "pagstate" , isPending);
+  console.log(pagination, "pagstate", isPending);
 
   return (
     <>
@@ -126,7 +127,7 @@ export default function ProductsOverview() {
                     {product.name}
                   </h3>
                   <p className="text-sm text-gray-600 pl-3 font-medium">
-                    {product.price}
+                    {formatCurrency(product.price)}
                   </p>
                 </div>
               );
