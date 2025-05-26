@@ -78,8 +78,10 @@ const Signup = ({ tab }: { tab: string }) => {
       // redirect user back to previous page;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
+        console.log(error.response, 'err response');
         const message =
           error.response.data?.error || "An unexpected error occurred";
+          console.log(message, 'message error');
         toast.error(message);
       } else {
         toast.error("An unexpected error occurred");
