@@ -64,7 +64,9 @@ const Signup = ({ tab }: { tab: string }) => {
 
       if (res.statusText !== "Created") return;
 
-      toast.success("Signup successful!");
+     setTimeout(()=>{
+       toast.success("Signup successful!");
+     },3000)
       setInputValue(initialSignupValues);
       const decode: DecodedToken = jwtDecode(res.data.access_token);
       setUser({

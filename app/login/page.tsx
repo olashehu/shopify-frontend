@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { validateField } from "@/app/lib/validateField";
 import toast from "react-hot-toast";
 import { jwtDecode } from "jwt-decode";
-import { DecodedToken } from "../lib/constant";
+import { DecodedToken, baseURL } from "../lib/constant";
 import { useCart } from "../context/cartContext";
 
 interface LoginInputProps {
@@ -40,14 +40,14 @@ const Login = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post(
-        "http://localhost:4000/auth/login",
-        inputValue
-      );
       // const res = await axios.post(
-      //   `${baseURL}/auth/login`,
+      //   "http://localhost:4000/auth/login",
       //   inputValue
       // );
+      const res = await axios.post(
+        `${baseURL}/auth/login`,
+        inputValue
+      );
       if (res.statusText !== "Created") return;
 
       toast.success("Login successful!");

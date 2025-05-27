@@ -54,5 +54,3 @@ export const initialTouchedState = {
 
 export const baseURL = "https://shopify-commerce-api.onrender.com";
 export const LIMIT = 10;
-
-// export const frontendURL = "https://shopify-frontend-lnyt.onrender.com";
