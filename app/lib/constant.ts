@@ -51,6 +51,19 @@ export const initialTouchedState = {
   phoneNumber: false,
   password: false,
 };
+export interface CartContextType {
+  cartItems: CartItem[];
+  cartCount: number;
+  user: DecodedToken | null;
+  setUser: (user: DecodedToken | null) => void;
+  addToCart: (product: ProductsTypes, quantity: number) => void;
+  checkout: () => void;
+  removeFromCart: (productId: string) => void;
+  updateCartQuantity: (productId: string, quantity: number) => void;
+}
+export interface CartItem extends ProductsTypes {
+  quantity: number;
+}
 
 export const baseURL = "https://shopify-commerce-api.onrender.com";
 export const LIMIT = 10;

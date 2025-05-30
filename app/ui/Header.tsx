@@ -39,13 +39,15 @@ const Header = () => {
         {/* <Button variant="ghost" className="p-2">
           <SearchIcon />
         </Button> */}
-        {user?.username && <div className="flex items-center gap-3">{user.username}</div>}
-        <Button variant="ghost" className="p-2 relative">
+        {user?.username && (
+          <div className="flex items-center gap-3">{user.username}</div>
+        )}
+        <Link href={'/cart'} className="relative p-2">
           <ShoppingCartIcon />
           <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">
             {cartCount}
           </span>
-        </Button>
+        </Link>
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="md:hidden">
