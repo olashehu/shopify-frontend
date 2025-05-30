@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,7 @@ interface ErrorProps {
 }
 
 const Login = () => {
+  const router = useRouter();
   const { setUser } = useCart();
   const [inputValue, setInputValue] = useState<LoginInputProps>({
     email: "",
@@ -44,13 +46,12 @@ const Login = () => {
       //   "http://localhost:4000/auth/login",
       //   inputValue
       // );
-      const res = await axios.post(
-        `${baseURL}/auth/login`,
-        inputValue
-      );
+      const res = await axios.post(`${baseURL}/auth/login`, inputValue);
       if (res.statusText !== "Created") return;
 
-      toast.success("Login successful!");
+      setTimeout(() => {
+        toast.success("Login successful!");
+      }, 3000);
       setInputValue({ email: "", password: "" });
       setTouched({ email: false, password: false });
       const decode: DecodedToken = jwtDecode(res.data.access_token);
@@ -64,6 +65,7 @@ const Login = () => {
       });
       // redirect user back to previous page;
       setLoading(false);
+      router.push('/');
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const message =

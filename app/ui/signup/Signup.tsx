@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
@@ -18,6 +19,7 @@ import {
 import { useCart } from "@/app/context/cartContext";
 
 const Signup = ({ tab }: { tab: string }) => {
+  const router = useRouter();
   const { setUser } = useCart();
   const [inputValue, setInputValue] = useState<FieldProps>(initialSignupValues);
   const [touched, setTouched] = useState(initialTouchedState);
@@ -78,6 +80,7 @@ const Signup = ({ tab }: { tab: string }) => {
         token: res.data.access_token,
       });
       // redirect user back to previous page;
+      router.push('/')
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.log(error.response, 'err response');
