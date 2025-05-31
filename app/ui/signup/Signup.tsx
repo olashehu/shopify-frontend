@@ -64,7 +64,7 @@ const Signup = ({ tab }: { tab: string }) => {
         formToSubmit
       );
 
-      if (res.statusText !== "Created") return;
+      if (!res.data) return;
 
       setInputValue(initialSignupValues);
       const decode: DecodedToken = jwtDecode(res.data.access_token);

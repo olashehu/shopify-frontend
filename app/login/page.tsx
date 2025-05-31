@@ -47,8 +47,8 @@ const Login = () => {
       //   inputValue
       // );
       const res = await axios.post(`${baseURL}/auth/login`, inputValue);
-      console.log(res, '<====>')
-      if (res.statusText !== "Created") return;
+      console.log(res.data, '<====>')
+      if (!res.data) return;
 
       setInputValue({ email: "", password: "" });
       setTouched({ email: false, password: false });
