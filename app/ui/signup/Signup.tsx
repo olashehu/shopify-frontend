@@ -66,9 +66,6 @@ const Signup = ({ tab }: { tab: string }) => {
 
       if (res.statusText !== "Created") return;
 
-     setTimeout(()=>{
-       toast.success("Signup successful!");
-     },3000)
       setInputValue(initialSignupValues);
       const decode: DecodedToken = jwtDecode(res.data.access_token);
       setUser({
@@ -80,7 +77,10 @@ const Signup = ({ tab }: { tab: string }) => {
         token: res.data.access_token,
       });
       // redirect user back to previous page;
-      router.push('/')
+      setTimeout(() => {
+        toast.success("Signup successful!");
+      }, 5000);
+      router.back()
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.log(error.response, 'err response');

@@ -49,9 +49,6 @@ const Login = () => {
       const res = await axios.post(`${baseURL}/auth/login`, inputValue);
       if (res.statusText !== "Created") return;
 
-      setTimeout(() => {
-        toast.success("Login successful!");
-      }, 3000);
       setInputValue({ email: "", password: "" });
       setTouched({ email: false, password: false });
       const decode: DecodedToken = jwtDecode(res.data.access_token);
@@ -65,7 +62,10 @@ const Login = () => {
       });
       // redirect user back to previous page;
       setLoading(false);
-      router.push('/');
+      setTimeout(() => {
+        toast.success("Login successful!");
+      }, 5000);
+      router.back()
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const message =
