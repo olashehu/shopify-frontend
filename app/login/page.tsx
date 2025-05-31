@@ -47,6 +47,7 @@ const Login = () => {
       //   inputValue
       // );
       const res = await axios.post(`${baseURL}/auth/login`, inputValue);
+      console.log(res, '<====>')
       if (res.statusText !== "Created") return;
 
       setInputValue({ email: "", password: "" });
@@ -65,6 +66,7 @@ const Login = () => {
       setTimeout(() => {
         toast.success("Login successful!");
       }, 5000);
+      console.log('after set time out')
       router.back()
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
